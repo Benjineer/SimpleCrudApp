@@ -29,7 +29,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private JwtService jwtService;
