@@ -6,6 +6,7 @@
 package com.example.simplecrud.services;
 
 import com.example.simplecrud.dtos.CustomerDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
  */
 public interface CustomerService {
     
-    Optional<CustomerDTO> create(CustomerDTO customerDTO);
+    Optional<CustomerDTO> create(CustomerDTO customerDTO) throws Exception;
     
     Optional<CustomerDTO> get(Long id);
     

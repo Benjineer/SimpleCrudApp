@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.simplecrud.service.impls;
+package com.example.simplecrud.services.impls;
 
 import com.example.simplecrud.dtos.CustomerDTO;
 import com.example.simplecrud.entities.CustomerEntity;
 import com.example.simplecrud.repositories.CustomerRepository;
 import com.example.simplecrud.services.CustomerService;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -31,10 +32,10 @@ public class CustomerServiceImpl implements CustomerService{
     private ModelMapper modelMapper;
 
     @Override
-    public Optional<CustomerDTO> create(CustomerDTO customerDTO) {
+    public Optional<CustomerDTO> create(CustomerDTO customerDTO) throws Exception {
         
         Optional<CustomerEntity> optCustEnt = customerRepository.findByEmail(customerDTO.getEmail());
-        if(optCustEnt.isPresent()) return Optional.empty();
+        if(optCustEnt.isPresent()) throw new Exception("Customer already exists");
         
         CustomerEntity customerEntity = modelMapper.map(customerDTO, CustomerEntity.class);
         customerEntity.setPassword(BCrypt.hashpw(customerEntity.getPassword(), BCrypt.gensalt()));
